@@ -122,7 +122,7 @@ class PostController extends Controller
 
             $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('category', $imagename);
-            @unlink(public_path('uploads/category/'.$old_file_name));
+            unlink(public_path('uploads/category/'.$old_file_name));
            
 
         } else {
@@ -153,7 +153,7 @@ class PostController extends Controller
     public function postDelete($id){
 
         $post =  Post::find($id);
-        @unlink(public_path('uploads/category/'.$post->image));
+        unlink(public_path('uploads/category/'.$post->image));
 
         $post->categories()->detach();
         $post->tags()->detach();

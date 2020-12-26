@@ -120,7 +120,7 @@
                         </div>
                         <div class="body">
                            
-                                <img class="img-responsive thumbnall"src="{{Storage::disk('public')->url('post/'.$post->image)}}" alt="">
+                                <img class="img-responsive thumbnall" src="{{asset('uploads/category/'.$post->image)}}" alt="">
                           
                         </div>
                     </div>
