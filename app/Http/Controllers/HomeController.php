@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -114,6 +116,15 @@ public function authorLogin(Request $request){
 }else{
     return redirect()->back()->with('msg','Your creditional is invalid');
 }
+}
+
+///Front end 
+
+public function homeIndex(){
+    
+    $posts = Post::latest()->take(6)->get();
+    $categories = Category::all();
+    return view('master',compact('categories','posts'));
 }
 
 }

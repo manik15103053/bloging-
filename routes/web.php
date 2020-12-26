@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
+use NunoMaduro\Collision\Contracts\Highlighter;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login',[HomeController::class,'login'])->name('login');
 Route::post('login/process',[HomeController::class,'loginProcess'])->name('login.process');
 //end Login////
-Route::get('/', function () {
-  return view('master');
-})->name('home');
+Route::get('/',[HomeController::class,'homeIndex'])->name('home');
+
+
 ///User Subscriber
 Route::post('/user/subscriber',[SubscribeController::class,'userSubscriber'])->name('user.subscriber');
 
