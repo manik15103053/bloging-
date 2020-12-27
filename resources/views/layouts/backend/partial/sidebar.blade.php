@@ -2,7 +2,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="{{asset('assets/backend')}}/images/user.png" width="48" height="48" alt="User" />
+                    <img src="{{asset('uploads/profile/'.auth()->user()->image)}}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{auth()->user()->name}}</div>
@@ -74,6 +74,12 @@
                         <a href="{{route('author.post.index')}}">
                             <i class="material-icons">library_books</i>
                             <span>Post</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="{{route('author.setting')}}">
+                            <i class="material-icons">settings</i>
+                            <span>Setting</span>
                         </a>
                     </li>
 

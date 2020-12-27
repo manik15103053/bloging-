@@ -73,7 +73,7 @@
 
 							<div class="blog-image"><img src="{{asset('uploads/category/'.$post->image)}}" alt="{{$post->title}}"></div>
 
-							<a class="avatar" href="#"><img src="images/icons8-team-355979.jpg" alt="Profile Image"></a>
+							<a class="avatar" href="#"><img src="{{asset('uploads/profile/'.$post->user->image)}}" alt="Profile Image"></a>
 
 							<div class="blog-info">
 

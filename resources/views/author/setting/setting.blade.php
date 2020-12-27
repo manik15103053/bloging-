@@ -63,7 +63,7 @@
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="profile_with_icon_title">
                 
-                                <form method="POST"action ="{{route('profile.update')}}"enctype ="multipart/form-data"class="form-horizontal">
+                                <form method="POST"action ="{{route('author.profile.update')}}"enctype ="multipart/form-data"class="form-horizontal">
                                 @csrf
                                 <div class="row clearfix">
                                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
@@ -123,7 +123,7 @@
                             </form>
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="password_with_icon_title">
-                                <form method="POST"action ="{{route('password.update')}}"class="form-horizontal">
+                                <form method="POST"action ="{{route('author.password.update')}}"class="form-horizontal">
                                 @csrf
                                 <div class="row clearfix">
                                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">

@@ -35,6 +35,7 @@ Route::get('/admin/dashboard',[HomeController::class,'home'])->name('admin.dashb
 
 Route::get('/admin/setting',[AdminsettingController::class,'settingIndex'])->name('admin.setting');
 Route::post('/profile/update',[AdminsettingController::class,'profileUpdate'])->name('profile.update');
+Route::post('/password/update',[AdminsettingController::class,'passwordUpdate'])->name('password.update');
 
 
 
@@ -96,6 +97,10 @@ Route::post('author/login',[HomeController::class,'authorLogin'])->name('author.
 Route::group(['middleware' => 'auth'], function(){
 
  Route::get('/author/dashboard',[HomeController::class,'authorHome'])->name('author.dashboard');
+
+Route::get('/author/setting',[AuthorsettingController::class,'authorsettingIndex'])->name('author.setting');
+Route::post('/author/profile/update',[AuthorsettingController::class,'authorprofileUpdate'])->name('author.profile.update');
+Route::post('/author/password/update',[AuthorsettingController::class,'authorpasswordUpdate'])->name('author.password.update');
 
 
  Route::get('/author/post/index',[AuthorpostController::class,'authorIndex'])->name('author.post.index');
