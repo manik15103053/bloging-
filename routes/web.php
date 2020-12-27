@@ -33,6 +33,9 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::get('/admin/dashboard',[HomeController::class,'home'])->name('admin.dashboard');
 
+Route::get('/admin/setting',[AdminsettingController::class,'settingIndex'])->name('admin.setting');
+Route::post('/profile/update',[AdminsettingController::class,'profileUpdate'])->name('profile.update');
+
 
 
 ///Admin Logout

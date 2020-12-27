@@ -63,6 +63,12 @@
                             <span>Subscriber</span>
                         </a>
                     </li>
+                    <li class="active">
+                        <a href="{{route('admin.setting')}}">
+                            <i class="material-icons">settings</i>
+                            <span>Setting</span>
+                        </a>
+                    </li>
                     @else
                     <li class="active">
                         <a href="{{route('author.post.index')}}">
