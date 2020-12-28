@@ -28,6 +28,13 @@ Route::get('/',[HomeController::class,'homeIndex'])->name('home');
 ///User Subscriber
 Route::post('/user/subscriber',[SubscribeController::class,'userSubscriber'])->name('user.subscriber');
 
+///Route for favorite Post
+Route::group(['middleware' => ['auth']], function(){
+
+Route::get('/favorite/{id}/add',[favoriteController::class,'add'])->name('post.favorite');
+
+});
+
 
 Route::group(['middleware' => 'auth'], function(){
 
@@ -74,6 +81,10 @@ Route::get('/post/delete/{id}',[PostController::class,'postDelete'])->name('post
 Route::get('post/pending',[PostController::class,'postPending'])->name('post.pending');
 Route::get('/post/approve/{id}',[PostController::class,'postApprove'])->name('post.approve');
 
+///Favorate Route
+Route::get('/admin/favorite/list',[AdminfavoriteController::class,'favorateIndex'])->name('admin.favorate');
+//Route::get('/admin/favorite/delete/{id}',[AdminfavoriteController::class,'favoriteDelete'])->name('favorite.delete');
+
 Route::get('/subscribe/list',[SubscribeController::class,'subscribeList'])->name('subscribt.list');
 Route::get('/subscribe/delete/{id}',[SubscribeController::class,'subscribeDelete'])->name('subscribe.delete');
 });
@@ -101,6 +112,8 @@ Route::group(['middleware' => 'auth'], function(){
 Route::get('/author/setting',[AuthorsettingController::class,'authorsettingIndex'])->name('author.setting');
 Route::post('/author/profile/update',[AuthorsettingController::class,'authorprofileUpdate'])->name('author.profile.update');
 Route::post('/author/password/update',[AuthorsettingController::class,'authorpasswordUpdate'])->name('author.password.update');
+Route::get('/author/favorite/list',[AuthorfavoriteController::class,'authorfavoriteIndex'])->name('author.favorate');
+
 
 
  Route::get('/author/post/index',[AuthorpostController::class,'authorIndex'])->name('author.post.index');

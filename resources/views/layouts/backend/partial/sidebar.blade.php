@@ -54,7 +54,13 @@
                     <li class="active">
                         <a href="{{route('post.pending')}}">
                             <i class="material-icons">library_books</i>
-                            <span>Pending Post</span>
+                            <span>Pending Posts</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="{{route('admin.favorate')}}">
+                            <i class="material-icons">favorite</i>
+                            <span>Favorite Posts</span>
                         </a>
                     </li>
                     <li class="active">
@@ -74,6 +80,12 @@
                         <a href="{{route('author.post.index')}}">
                             <i class="material-icons">library_books</i>
                             <span>Post</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="{{route('author.favorate')}}">
+                            <i class="material-icons">favorite</i>
+                            <span>Favorite Posts</span>
                         </a>
                     </li>
                     <li class="active">
