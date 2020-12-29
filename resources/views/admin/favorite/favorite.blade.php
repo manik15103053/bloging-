@@ -58,10 +58,10 @@
                                             <td>{{$post->favorite_to_users->count()}}</td>
                                             <td>{{$post->view_count}}</td>
                                             <td>
-                                            <a href="{{route('admin.favorate',$post->id)}}"class="btn btn-danger waves-effect">
+                                            <a href=""class="btn btn-danger waves-effect">
                                                 <i class="material-icons">delete</i>
                                             </a>
-                                            <a href="{{route('post.show',$post->id)}}"class="btn btn-danger waves-effect">
+                                            <a href=""class="btn btn-danger waves-effect">
                                                 <i class="material-icons">visibility</i>
                                             </a>
                                             </td>

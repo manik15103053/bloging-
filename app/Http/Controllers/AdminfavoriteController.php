@@ -16,4 +16,5 @@ class AdminfavoriteController extends Controller
     }
 
    
+   
 }

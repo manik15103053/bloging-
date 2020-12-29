@@ -153,11 +153,9 @@ class PostController extends Controller
     public function postDelete($id){
 
         $post =  Post::find($id);
-        unlink(public_path('uploads/category/'.$post->image));
-
+        @unlink(public_path('uploads/category/'.$post->image));
         $post->categories()->detach();
         $post->tags()->detach();
-
         $post->delete();
      
      return redirect(route('post.index'))->with('msg','Post Delete Successfully.');
