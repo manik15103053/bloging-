@@ -23,6 +23,8 @@ Route::get('/login',[HomeController::class,'login'])->name('login');
 Route::post('login/process',[HomeController::class,'loginProcess'])->name('login.process');
 //end Login////
 Route::get('/',[HomeController::class,'homeIndex'])->name('home');
+///Post Details 
+Route::get('/post/details/{slug}',[PostdetailsController::class,'postDetails'])->name('post.details');
 
 
 ///User Subscriber
