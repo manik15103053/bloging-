@@ -54,7 +54,7 @@ class HomeController extends Controller
 public function logout(){
     Auth::logout();
     
-    return redirect(route('login'));
+    return redirect(route('registration.form'));
 }
 
 //Author Registration

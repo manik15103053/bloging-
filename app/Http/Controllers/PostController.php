@@ -71,6 +71,9 @@ class PostController extends Controller
         }
         $post->is_approved  = true;
         $post->save();
+
+
+        
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
 

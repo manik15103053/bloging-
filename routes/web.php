@@ -23,6 +23,8 @@ Route::get('/login',[HomeController::class,'login'])->name('login');
 Route::post('login/process',[HomeController::class,'loginProcess'])->name('login.process');
 //end Login////
 Route::get('/',[HomeController::class,'homeIndex'])->name('home');
+//All Post Route
+Route::get('/all/post',[PostdetailsController::class,'allPost'])->name('allPost.index');
 ///Post Details 
 Route::get('/post/details/{slug}',[PostdetailsController::class,'postDetails'])->name('post.details');
 
