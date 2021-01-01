@@ -91,6 +91,7 @@ Route::get('/admin/favorite/list',[AdminfavoriteController::class,'favorateIndex
 //Route::get('/admin/favorite/delete/{id}',[AdminfavoriteController::class,'favoriteDelete'])->name('favorite.delete');
 //Admin Comment List
 Route::get('/admin/comment/list',[CommentController::class,'adminComment'])->name('admin.comment');
+Route::get('/admin/comment/delete/{id}',[CommentController::class,'admincommentDelete'])->name('admin.comment.delete');
 Route::get('/subscribe/list',[SubscribeController::class,'subscribeList'])->name('subscribt.list');
 Route::get('/subscribe/delete/{id}',[SubscribeController::class,'subscribeDelete'])->name('subscribe.delete');
 });
@@ -119,6 +120,10 @@ Route::get('/author/setting',[AuthorsettingController::class,'authorsettingIndex
 Route::post('/author/profile/update',[AuthorsettingController::class,'authorprofileUpdate'])->name('author.profile.update');
 Route::post('/author/password/update',[AuthorsettingController::class,'authorpasswordUpdate'])->name('author.password.update');
 Route::get('/author/favorite/list',[AuthorfavoriteController::class,'authorfavoriteIndex'])->name('author.favorate');
+
+///Author Comment list
+Route::get('/author/comment/list',[CommentController::class,'auhtorComment'])->name('author.comment');
+Route::get('/autor/comment/delete/{id}',[CommentController::class,'authorcommentDelete'])->name('author.comment.delete');
 
 
 

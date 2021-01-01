@@ -122,7 +122,7 @@ public function authorLogin(Request $request){
 
 public function homeIndex(){
     
-    $posts = Post::latest()->take(6)->get();
+    $posts = Post::latest()->where('is_approved', 1)->paginate(9);
     $categories = Category::all();
     return view('master',compact('categories','posts'));
 }
