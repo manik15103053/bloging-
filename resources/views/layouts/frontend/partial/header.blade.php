@@ -25,7 +25,8 @@
 				<li><a href="{{route('allPost.index')}}">Posts</a></li>
 
 				@guest 
-				<li><a href="{{route('registration.form')}}">Registration</a></li>				@else
+				<li><a href="{{route('registration.form')}}">Registration</a></li>	
+				@else
 				@if(Auth::user()->role_id == 1)
 				<li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
 				  @endif

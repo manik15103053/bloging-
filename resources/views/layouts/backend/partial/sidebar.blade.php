@@ -64,6 +64,12 @@
                         </a>
                     </li>
                     <li class="active">
+                        <a href="{{route('admin.comment')}}">
+                            <i class="material-icons">comment</i>
+                            <span>Comments</span>
+                        </a>
+                    </li>
+                    <li class="active">
                         <a href="{{route('subscribt.list')}}">
                             <i class="material-icons">subscriptions</i>
                             <span>Subscriber</span>
@@ -88,6 +94,7 @@
                             <span>Favorite Posts</span>
                         </a>
                     </li>
+                  
                     <li class="active">
                         <a href="{{route('author.setting')}}">
                             <i class="material-icons">settings</i>

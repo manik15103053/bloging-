@@ -1,7 +1,7 @@
 @extends('layouts.backend.app')
 
 
-@section('title','Post Table')
+@section('title','Comments')
 
 @push('css')
 <link href="{{asset('assets/backend')}}/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
@@ -10,23 +10,11 @@
 @endpush
 
 @section('content')
-@if(Session::has('msg'))
-    <div class="alert alert-info">
-        {{ Session::get('msg') }}
-    </div>
-@endif
+
 <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                        <div class="header">
-                            <h2>
-                                <a class="btn btn-primary waves-effect "href="{{route('create.post')}}">
-                                <i class="material-icons">add</i>
-                                <span>Add New Post</span>
-                                </a>
-                            </h2>
-                           
-                        </div>
+                      
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
@@ -34,78 +22,71 @@
 
                                     <h2>
 
-                                    All POSTS 
-                                    <span class="badge bg-blue">{{$posts->count()}}</span>
+                                    All Comments
+                                    <span class="badge bg-blue">{{$comments->count()}}</span>
                                     </h2>
                                     </div>
                                     <thead>
                                        
-                                    <tr>
-                                            <th>ID</th>
-                                            <th>Title</th>
-                                            <th>Author</th>
-                                            <th><i class="material-icons">visibility</i></th>
-                                            <th>Is Approved</th>
-                                            <th>Status</th>
-                                            <th>Created At</th>
-                                            
-                                            <th >Action</th>
+                                        <tr>
+                                            <th class="text-center">Comments Info</th>
+                                            <th class="text-center">Post Info</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Title</th>
-                                            <th>Author</th>
-                                            <th><i class="material-icons">visibility</i></th>
-                                            <th>Is Approved</th>
-                                            <th>Status</th>
-                                            <th>Created At</th>
-                                            
-                                            <th >Action</th>
-                                        </tr>
+                                     <tr>
+                                        <th class="text-center">Comments Info</th>
+                                            <th class="text-center">Post Info</th>
+                                            <th class="text-center">Action</th>
+                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                       @foreach($posts as $key=>$post)
+                                       @foreach($comments as $key=>$comment)
                                         <tr>
-                                            <td>{{$key +1}}</td>
-                                            <td>{{Str::limit($post->title,10)}}</td>
-                                            <td>{{$post->user->name}}</td>
-                                            <td>{{$post->view_count}}</td>
                                             <td>
+                                                <div class="media">
+                                                    <div class="media-left">
+                                                        <a href="#">
+                                                        <img width="64"height="64"class="media-object"src="{{asset('uploads/profile/'.$comment->user->image)}}" alt="Porfile Image">
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
 
-                                            @if($post->is_approved == true)
+                                                    <h4 class="media-heading">
+                                                        {{$comment->user->name}}
+                                                        <small>{{$comment->created_at->diffForHumans()}}</small>
+                        
+                                                    </h4>
+                                                    <p>{{$comment->comment}}</p>
+                                                    <a target="_blank"href="{{route('post.details',$comment->post->slug.'#comments')}}">Reply</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="media">
+                                                    <div class="media-right">
+                                                        <a href="#">
+                                                        <img width="64"height="64"class="media-object"src="{{asset('uploads/category/'.$comment->post->image)}}" alt="{{$comment->post->title}}">
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
 
-                                            <span class="badge bg-blue">Approved</span>
-
-                                            @else
-                                            <span class="badge bg-pink">Pending</span>
-                                            @endif
+                                                 
+                                                    <a target="_blank"href="{{route('post.details',$comment->post->slug ) }}">
+                                                        <h4 class="media-heading"> {{ Str::limit($comment->post->title, 20)}}</h4>
+                                                    </a>
+                                                    <p>by <strong>{{$comment->post->user->name}}</strong></p>
+                                                    </div>
+                                                </div>
                                             </td>
                                             <td>
 
-                                                @if($post->status == true)
-
-                                                <span class="badge bg-blue">Published</span>
-
-                                                @else
-                                                <span class="badge bg-pink">Pending</span>
-                                                @endif
-                                            </td>
-                                            <td>{{$post->created_at}}</td>
-                                            
-                                            <td >
-
-                                            <a href="{{route('post.edit',$post->id)}}"class="btn btn-info waves-effect">
-                                                <i class="material-icons">edit</i>
-                                            </a>
-                                            <a href="{{route('post.delete',$post->id)}}"class="btn btn-danger waves-effect">
+                                            <a href=""class="btn btn-danger waves-effect">
                                                 <i class="material-icons">delete</i>
                                             </a>
-                                            <a href="{{route('post.show',$post->id)}}"class="btn btn-danger waves-effect">
-                                                <i class="material-icons">visibility</i>
-                                            </a>
                                             </td>
+                                            
                                             
                                         </tr>
                                       

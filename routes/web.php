@@ -36,6 +36,7 @@ Route::post('/user/subscriber',[SubscribeController::class,'userSubscriber'])->n
 Route::group(['middleware' => ['auth']], function(){
 
 Route::get('/favorite/{id}/add',[favoriteController::class,'add'])->name('post.favorite');
+Route::post('store//comment/{post}',[CommentController::class,'comment'])->name('comment.store');
 
 });
 
@@ -88,7 +89,8 @@ Route::get('/post/approve/{id}',[PostController::class,'postApprove'])->name('po
 ///Favorate Route
 Route::get('/admin/favorite/list',[AdminfavoriteController::class,'favorateIndex'])->name('admin.favorate');
 //Route::get('/admin/favorite/delete/{id}',[AdminfavoriteController::class,'favoriteDelete'])->name('favorite.delete');
-
+//Admin Comment List
+Route::get('/admin/comment/list',[CommentController::class,'adminComment'])->name('admin.comment');
 Route::get('/subscribe/list',[SubscribeController::class,'subscribeList'])->name('subscribt.list');
 Route::get('/subscribe/delete/{id}',[SubscribeController::class,'subscribeDelete'])->name('subscribe.delete');
 });
