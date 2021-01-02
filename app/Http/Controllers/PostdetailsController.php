@@ -12,7 +12,7 @@ class PostdetailsController extends Controller
 
     public function allPost(){
 
-        $posts = Post::latest()->paginate(9);
+        $posts = Post::Approved()->Published()->paginate(9);
 
         return view('posts',compact('posts'));
     }
@@ -20,7 +20,7 @@ class PostdetailsController extends Controller
 
     public function postDetails($slug){
 
-    $post  = Post::where('slug',$slug)->first();
+    $post  = Post::where('slug',$slug)->Approved()->Published()->first();
 
     $blogKey  = 'blog_' . $post->id;
     if(!Session::has($blogKey)){
@@ -30,7 +30,7 @@ class PostdetailsController extends Controller
 
     }
     //dd($post->all());
-    $randompost = Post::all()->random(3);
+    $randompost = Post::Approved()->Published()->take(3)->inRandomOrder()->get();
     return view('post_details',compact('post','randompost'));
 
     }

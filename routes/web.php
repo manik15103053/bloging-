@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 use NunoMaduro\Collision\Contracts\Highlighter;
@@ -27,6 +28,8 @@ Route::get('/',[HomeController::class,'homeIndex'])->name('home');
 Route::get('/all/post',[PostdetailsController::class,'allPost'])->name('allPost.index');
 ///Post Details 
 Route::get('/post/details/{slug}',[PostdetailsController::class,'postDetails'])->name('post.details');
+Route::get('/category/{slug}',[PostController::class,'postByCategory'])->name('category.post');
+Route::get('/tag/{slug}',[PostController::class,'postByTag'])->name('tag.post');
 
 
 ///User Subscriber
@@ -134,11 +137,6 @@ Route::get('/autor/comment/delete/{id}',[CommentController::class,'authorcomment
  Route::post('/author/post/update/{id}',[AuthorpostController::class,'authorUpdate'])->name('author.post.update');
  Route::get('/author/post/show/{id}',[AuthorpostController::class,'authorShow'])->name('author.post.show');
  Route::get('/author/post/delete/{id}',[AuthorpostController::class,'authorDelete'])->name('author.post.delete');
-
-
-
-
-
 
 
 });

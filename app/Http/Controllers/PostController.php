@@ -199,4 +199,24 @@ class PostController extends Controller
      }
      
  }
+
+ public function postByCategory($slug){
+
+
+     $category =  Category::where('slug',$slug)->first();
+     $posts = $category->posts()->Approved()->Published()->get();
+
+    return view('category_post',compact('category','posts'));
+
+ 
+ }
+
+ public function postByTag($slug){
+
+     $tag = Tag::where('slug',$slug)->first();
+
+     $posts = $tag->posts()->Approved()->Published()->get();
+
+    return view('tag_post',compact('tag','posts'));
+ }
 }
