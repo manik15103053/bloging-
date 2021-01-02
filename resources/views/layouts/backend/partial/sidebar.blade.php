@@ -70,6 +70,12 @@
                         </a>
                     </li>
                     <li class="active">
+                        <a href="{{route('author.list')}}">
+                            <i class="material-icons">account_circle</i>
+                            <span>Authors</span>
+                        </a>
+                    </li>
+                    <li class="active">
                         <a href="{{route('subscribt.list')}}">
                             <i class="material-icons">subscriptions</i>
                             <span>Subscriber</span>

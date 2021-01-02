@@ -35,6 +35,10 @@ Route::get('/tag/{slug}',[PostController::class,'postByTag'])->name('tag.post');
 ///User Subscriber
 Route::post('/user/subscriber',[SubscribeController::class,'userSubscriber'])->name('user.subscriber');
 
+///Search Route
+
+Route::get('/search',[SearchController::class,'searchIndex'])->name('search');
+
 ///Route for favorite Post
 Route::group(['middleware' => ['auth']], function(){
 
@@ -92,6 +96,9 @@ Route::get('/post/approve/{id}',[PostController::class,'postApprove'])->name('po
 ///Favorate Route
 Route::get('/admin/favorite/list',[AdminfavoriteController::class,'favorateIndex'])->name('admin.favorate');
 //Route::get('/admin/favorite/delete/{id}',[AdminfavoriteController::class,'favoriteDelete'])->name('favorite.delete');
+
+Route::get('/author/list',[AuthorController::class,'authorList'])->name('author.list');
+Route::get('/author/delete/{id}',[AuthorController::class,'authorDelete'])->name('author.delete');
 //Admin Comment List
 Route::get('/admin/comment/list',[CommentController::class,'adminComment'])->name('admin.comment');
 Route::get('/admin/comment/delete/{id}',[CommentController::class,'admincommentDelete'])->name('admin.comment.delete');
