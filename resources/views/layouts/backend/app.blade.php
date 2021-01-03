@@ -126,6 +126,10 @@
 
     <!-- Demo Js -->
     <script src="{{asset('assets/backend')}}/js/demo.js"></script>
+    <script src="{{asset('assets/backend')}}plugins/jquery-countto/jquery.countTo.js"></script>
+
+
+   <script src="{{asset('assets/backend')}}/js/pages/index.js"></script>
     
     @stack('js')
 
