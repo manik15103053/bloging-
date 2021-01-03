@@ -15,8 +15,8 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->string('title');
+            $table->foreignId('user_id')->constrained('users')->onDeleteCascade();
+            $table->text('title');
             $table->string('slug');
             $table->string('image')->default('default.png');
             $table->text('body');

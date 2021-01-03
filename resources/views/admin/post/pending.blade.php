@@ -43,7 +43,7 @@
 
                                     <h2>
 
-                                    All POSTS 
+                                    ALL PENDING POSTS 
                                     <span class="badge bg-blue">{{$posts->count()}}</span>
                                     </h2>
                                     </div>
@@ -78,7 +78,7 @@
                                        @foreach($posts as $key=>$post)
                                         <tr>
                                             <td>{{$key +1}}</td>
-                                            <td>{{$post->title}}</td>
+                                            <td>{{ Str::limit($post->title , 12)}}</td>
                                             <td>{{$post->user->name}}</td>
                                             <td>{{$post->view_count}}</td>
                                             <td>

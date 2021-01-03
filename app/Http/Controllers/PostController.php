@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     public function postIndex(){
-  
+            
 
         $posts = Post::latest()->get();
         return view('admin.post.index',compact('posts'));
@@ -213,9 +213,11 @@ class PostController extends Controller
 
  public function postByTag($slug){
 
-     $tag = Tag::where('slug',$slug)->first();
 
-     $posts = $tag->posts()->Approved()->Published()->get();
+     $tag = Tag::where('slug',$slug)->first();
+    
+
+  $posts = $tag->posts()->Approved()->Published()->get();
 
     return view('tag_post',compact('tag','posts'));
  }

@@ -20,6 +20,8 @@ class PostdetailsController extends Controller
 
     public function postDetails($slug){
 
+       
+
     $post  = Post::where('slug',$slug)->Approved()->Published()->first();
 
     $blogKey  = 'blog_' . $post->id;

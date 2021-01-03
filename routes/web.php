@@ -28,10 +28,12 @@ Route::get('/',[HomeController::class,'homeIndex'])->name('home');
 Route::get('/all/post',[PostdetailsController::class,'allPost'])->name('allPost.index');
 ///Post Details 
 Route::get('/post/details/{slug}',[PostdetailsController::class,'postDetails'])->name('post.details');
-Route::get('/category/{slug}',[PostController::class,'postByCategory'])->name('category.post');
-Route::get('/tag/{slug}',[PostController::class,'postByTag'])->name('tag.post');
+Route::get('/post_category/{slug}',[PostController::class,'postByCategory'])->name('category.post');
+Route::get('/post_by_tag/{slug}',[PostController::class,'postByTag'])->name('tag.post');
 
+///Authro Profiles
 
+Route::get('/author/profile/{username}',[AuthorprofileController::class,'profile'])->name('author.profile');
 ///User Subscriber
 Route::post('/user/subscriber',[SubscribeController::class,'userSubscriber'])->name('user.subscriber');
 
