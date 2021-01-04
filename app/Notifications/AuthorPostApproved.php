@@ -30,7 +30,7 @@ class AuthorPostApproved extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -56,10 +56,13 @@ class AuthorPostApproved extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toDatabase($notifiable)
     {
         return [
-            //
+            'name' => $this->post->user->name,
+            'title' => $this->post->title,
+            'time' => $this->post->updated_at,
+            'slug' => $this->post->slug,
         ];
     }
 }
