@@ -114,7 +114,6 @@
     <script src="{{asset('assets/backend')}}/plugins/node-waves/waves.js"></script>
 
     <!-- Jquery CountTo Plugin Js -->
-    <script src="{{asset('assets/backend')}}/plugins/jquery-countto/jquery.countTo.js"></script>
 
     <!-- Morris Plugin Js -->
     <script src="{{asset('assets/backend')}}/plugins/raphael/raphael.min.js"></script>
@@ -126,10 +125,10 @@
 
     <!-- Demo Js -->
     <script src="{{asset('assets/backend')}}/js/demo.js"></script>
-    <script src="{{asset('assets/backend')}}plugins/jquery-countto/jquery.countTo.js"></script>
 
+    <script src="{{asset('assets/backend')}}/plugins/jquery-countto/jquery.countTo.js"></script>
 
-   <script src="{{asset('assets/backend')}}/js/pages/index.js"></script>
+   <!-- <script src="{{asset('assets/backend')}}/js/pages/index.js"></script> -->
     
     @stack('js')
 

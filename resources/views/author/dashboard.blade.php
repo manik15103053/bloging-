@@ -122,6 +122,10 @@
         </div>
 @endsection
 
-@push('css')
+@push('js')
+<script src="{{asset('assets/backend')}}plugins/jquery-countto/jquery.countTo.js"></script>
+
+
+<script src="{{asset('assets/backend')}}/js/pages/index.js"></script>
 
 @endpush
