@@ -130,16 +130,16 @@ class AuthorpostController extends Controller
 
             $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('category', $imagename);
-            @unlink(public_path('uploads/category/'.$old_file_name));
+            if(file_exists(public_path($post->image)) && public_path($post->image) != NULL && public_path($post->image) != '')
+            unlink(public_path('uploads/category/'.$old_file_name));
            
 
         } else {
-            $imagename  = "default.png";
+            $imagename  = $post->image;
         }
        
         $post->user_id  = Auth::id();
         $post->title    = $request->title;
-        $post->slug     = $slug;
         $post->image    = $imagename;
         $post->body     = $request->body;
         if(isset($request->status)){
@@ -148,6 +148,7 @@ class AuthorpostController extends Controller
             $post->status  = false;
         }
         $post->is_approved  = false;
+        dd($post);
         $post->save();
         $post->categories()->sync($request->categories);
         $post->tags()->sync($request->tags);

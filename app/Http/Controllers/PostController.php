@@ -125,16 +125,16 @@ class PostController extends Controller
 
             $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('category', $imagename);
+            if(file_exists(public_path($post->image)) && public_path($post->image) != NULL && public_path($post->image) != '')
             unlink(public_path('uploads/category/'.$old_file_name));
            
 
         } else {
-            $imagename  = "default.png";
+            $imagename  = $post->image;
         }
        
         $post->user_id  = Auth::id();
         $post->title    = $request->title;
-        $post->slug     = $slug;
         $post->image    = $imagename;
         $post->body     = $request->body;
         if(isset($request->status)){
@@ -144,6 +144,8 @@ class PostController extends Controller
         }
         $post->is_approved  = true;
         $post->save();
+
+        //dd($post);
         $post->categories()->sync($request->categories);
         $post->tags()->sync($request->tags);
 
