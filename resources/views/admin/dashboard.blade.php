@@ -12,6 +12,7 @@
             <div class="block-header">
                 <h2>DASHBOARD</h2>
             </div>
+            @if(auth()->user()->role_id == 1)
 
             <!-- Widgets -->
             <div class="row clearfix">
@@ -156,6 +157,8 @@
                                         </tr>
 
                                         @endforeach
+
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
