@@ -17,7 +17,7 @@
 
 @section('content')
 
-@if ($errors->any())
+{{-- @if ($errors->any())
 	<div class="alert alert-danger">
 		<ul>
 			@foreach ($errors->all() as $error)
@@ -30,14 +30,14 @@
 	<div class="alert alert-info">
 		{{ Session::get('msg') }}
 	</div>
-@endif
+@endif --}}
 <div class="main-slider">
 		<div class="swiper-container position-static" data-slide-effect="slide" data-autoheight="false"
 			data-swiper-speed="500" data-swiper-autoplay="10000" data-swiper-margin="0" data-swiper-slides-per-view="4"
 			data-swiper-breakpoints="true" data-swiper-loop="true" >
 			<div class="swiper-wrapper">
 
-				
+
 			@foreach($categories as $category)
 
 			<div class="swiper-slide">
@@ -48,7 +48,7 @@
 							<div class="display-table center-text">
 								<div class="display-table-cell">
 									<h3><b>{{$category->name}}</b></h3>
-							
+
 								</div>
 							</div>
 						</div>
@@ -58,10 +58,10 @@
 
 
 			@endforeach
-			
+
 			<!-- swiper-slide -->
 
-			
+
 
 			</div><!-- swiper-wrapper -->
 
@@ -86,7 +86,7 @@
 
 							<div class="blog-info">
 
-							
+
 
 								<h4 class="title"><a href="{{route('post.details',$post->slug)}}"><b>{{$post->title}}</b></a></h4>
 
@@ -101,7 +101,7 @@
 											class="{{Auth::user()->favorite_posts->where('pivot.post_id', $post->id)->count()  == 0 ? '': 'favorite_posts' }} "><i class="ion-heart"></i>{{$post->favorite_to_users->count() }}</a>
 
 										@endguest
-									
+
 									</li>
 									<li><a href="#"><i class="ion-chatbubble"></i>{{$post->comments->count()}}</a></li>
 									<li><a href="#"><i class="ion-eye"></i>{{$post->view_count}}</a></li>

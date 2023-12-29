@@ -20,6 +20,8 @@
 
 	<link href="{{asset('assets/frontend/css')}}/ionicons.css" rel="stylesheet">
 	<link href="{{asset('assets/frontend/css/home/element.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
 
 
 
@@ -27,7 +29,7 @@
 </head>
 <body >
 
-    
+
     @include('layouts.frontend.partial.header')
 
 	@yield('content')
@@ -47,7 +49,42 @@
 
 
     <script src="{{asset('assets/frontend/js')}}/scripts.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    @if (Session::has('success'))
+        <script>
+            toastr.options = {
+                'progressBar': true,
+                'closeButton': true,
+                'timeout': 120000, // Adjust the timeout as needed
+            };
+            toastr.success("{{ Session::get('success') }}");
+        </script>
+        @elseif (Session::has('error'))
+        <script>
+            toastr.options = {
+                'progressBar': true,
+                'closeButton': true,
+                'timeout': 120000, // Adjust the timeout as needed
+            };
+            toastr.error("{{ Session::get('error') }}", 'Error!');
+        </script>
+        @endif
+
+        @if ($errors->any())
+            <script>
+                $(document).ready(function(){
+                    toastr.options = {
+                        'progressBar': true,
+                        'closeButton': true,
+                        'timeout': 120000, // Adjust the timeout as needed
+                    };
+                    @foreach ($errors->all() as $error)
+                        toastr.error("{{ $error }}", 'Error!');
+                    @endforeach
+                });
+            </script>
+        @endif
     @stack('js')
 
 </body>

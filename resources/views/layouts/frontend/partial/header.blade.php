@@ -1,6 +1,6 @@
 <header>
 		<div class="container-fluid position-relative no-side-padding">
-		@if ($errors->any())
+		{{-- @if ($errors->any())
     <div class="alert alert-danger float-right">
         <ul>
             @foreach ($errors->all() as $error)
@@ -8,12 +8,12 @@
             @endforeach
         </ul>
     </div>
-@endif
-		@if(Session::has('msg'))
+@endif --}}
+		{{-- @if(Session::has('msg'))
 			<div class="alert alert-info float-right">
 				{{ Session::get('msg') }}
 			</div>
-		@endif
+		@endif --}}
 
 
 			<a href="#" class="logo">Blog</a>
@@ -24,8 +24,8 @@
 				<li><a href="{{route('home')}}">Home</a></li>
 				<li><a href="{{route('allPost.index')}}">Posts</a></li>
 
-				@guest 
-				<li><a href="{{route('registration.form')}}">Registration</a></li>	
+				@guest
+				<li><a href="{{route('registration.form')}}">Registration</a></li>
 				@else
 				@if(Auth::user()->role_id == 1)
 				<li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
@@ -35,14 +35,14 @@
 				  @endif
 
 				@endguest
-				
-				
-				
+
+
+
 			</ul><!-- main-menu -->
 
 			<div class="src-area">
-			
-				
+
+
 			   <form method="GET"action="{{route('search')}}">
 					<button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
 					<input class="src-input"name="query"value="{{isset($query) ? $query : '' }}" type="text" placeholder="Type of search">
@@ -50,8 +50,8 @@
 
 
 			</div>
-			
-			
+
+
 
 		</div><!-- conatiner -->
 
@@ -64,7 +64,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-	
+
         <h5 class="modal-title" id="staticBackdropLabel">Regitration</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -75,14 +75,14 @@
 			<li class="nav-item" role="presentation">
 				<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Registration</a>
 			</li>
-			
-		
+
+
 			</ul>
 			<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
 			<form action="{{route('registration')}}"method="POST">
-				
+
 
 				@csrf
 					<div class="form-group">
@@ -121,15 +121,14 @@
 
 
 			</div>
-			
-			
+
+
 			</div>
       </div>
-      
+
     </div>
   </div>
 </div>
-	
+
 	</header>
 
-	

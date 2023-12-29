@@ -28,10 +28,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();
-
         $categories  = Category::all();
-
-        
         view()->share('categories',$categories);
     }
 }

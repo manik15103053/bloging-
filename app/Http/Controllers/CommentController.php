@@ -21,7 +21,7 @@ class CommentController extends Controller
         $comment->post_id  = $post;
         $comment->comment  = $request->comment;
         $comment->save();
-        return redirect()->back()->with('msg','Comment Successfully Published.'); 
+        return redirect()->back()->with('success','Comment Successfully Published.');
 
     }
     public function adminComment(){
@@ -34,10 +34,10 @@ class CommentController extends Controller
 
         $comment = Comment::find($id)->delete();
 
-        return redirect()->back()->with('msg','Comment Delete Successfully.');
+        return redirect()->back()->with('success','Comment Delete Successfully.');
     }
 
-    ///Author Comment List 
+    ///Author Comment List
 
     public function auhtorComment(){
 
@@ -51,7 +51,7 @@ class CommentController extends Controller
         if($comment->post->user->id == Auth::id()){
 
             $comment->delete();
-            return redirect()->back()->with('msg','Comment Delete Successfully.');
+            return redirect()->back()->with('success','Comment Delete Successfully.');
 
         }else{
             return redirect()->back()->with('error','You are not authorized to delete this comment: ');

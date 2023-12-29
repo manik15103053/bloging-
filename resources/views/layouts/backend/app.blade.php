@@ -14,7 +14,7 @@
 
 	<!-- Stylesheets -->
 
-	
+
 
 	<link rel="icon" href="{{asset('assets/backend')}}/favicon.ico" type="image/x-icon">
 
@@ -39,12 +39,13 @@
 
 <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
 <link href="{{asset('assets/backend')}}/css/themes/all-themes.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
      @stack('css')
 </head>
 <body class="theme-red">
 
-    
+
 <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
@@ -76,24 +77,24 @@
     </div>
     <!-- #END# Search Bar -->
     <!-- Top Bar -->
-	
-	
+
+
 	@include('layouts.backend.partial.topbar')
     <!-- #Top Bar -->
     <section>
         <!-- Left Sidebar -->
-		
+
 		@include('layouts.backend.partial.sidebar')
 
         <!-- #END# Left Sidebar -->
         <!-- Right Sidebar -->
-        
+
         <!-- #END# Right Sidebar -->
     </section>
 
     <section class="content">
-	   
-	
+
+
 	@yield('content')
     </section>
 
@@ -105,7 +106,7 @@
     <!-- Bootstrap Core Js -->
     <script src="{{asset('assets/backend')}}/plugins/bootstrap/js/bootstrap.js"></script>
 
- 
+
 
     <!-- Slimscroll Plugin Js -->
     <script src="{{asset('assets/backend')}}/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
@@ -119,7 +120,7 @@
     <script src="{{asset('assets/backend')}}/plugins/raphael/raphael.min.js"></script>
     <script src="{{asset('assets/backend')}}/plugins/morrisjs/morris.js"></script>
 
-    
+
     <!-- Custom Js -->
     <script src="{{asset('assets/backend')}}/js/admin.js"></script>
 
@@ -129,7 +130,42 @@
     <script src="{{asset('assets/backend')}}/plugins/jquery-countto/jquery.countTo.js"></script>
 
    <!-- <script src="{{asset('assets/backend')}}/js/pages/index.js"></script> -->
-    
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+   @if (Session::has('success'))
+    <script>
+        toastr.options = {
+            'progressBar': true,
+            'closeButton': true,
+            'timeout': 120000, // Adjust the timeout as needed
+        };
+        toastr.success("{{ Session::get('success') }}");
+    </script>
+    @elseif (Session::has('error'))
+    <script>
+        toastr.options = {
+            'progressBar': true,
+            'closeButton': true,
+            'timeout': 120000, // Adjust the timeout as needed
+        };
+        toastr.error("{{ Session::get('error') }}", 'Error!');
+    </script>
+    @endif
+
+    @if ($errors->any())
+        <script>
+            $(document).ready(function(){
+                toastr.options = {
+                    'progressBar': true,
+                    'closeButton': true,
+                    'timeout': 120000, // Adjust the timeout as needed
+                };
+                @foreach ($errors->all() as $error)
+                    toastr.error("{{ $error }}", 'Error!');
+                @endforeach
+            });
+        </script>
+    @endif
     @stack('js')
 
 </body>

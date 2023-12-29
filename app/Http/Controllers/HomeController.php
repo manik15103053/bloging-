@@ -23,7 +23,7 @@ class HomeController extends Controller
                         ->orderBy('comments_count','desc')
                         ->orderBy('favorite_to_users_count','desc')
                         ->take(5)->get();
-            
+
         $total_pending_posts = Post::where('is_approved',false)->count();
         $all_views = Post::sum('view_count');
         $author_count = User::where('role_id', 2)->count();
@@ -31,22 +31,22 @@ class HomeController extends Controller
                                 ->whereDate('created_at',Carbon::toDay())->count();
 
         $active_authors = User::where('role_id', 2)
-                                ->withCount('posts')                       
-                                ->withCount('comments')                       
+                                ->withCount('posts')
+                                ->withCount('comments')
                                 ->withCount('favorite_posts')
-                                ->orderBy('posts_count','desc')                       
-                                ->orderBy('comments_count','desc')                       
+                                ->orderBy('posts_count','desc')
+                                ->orderBy('comments_count','desc')
                                 ->orderBy('favorite_posts_count','desc')
                                 ->take(5)->get();
-        
+
         $category_count  = Category::all()->count();
         $tag_count       = Tag::all()->count();
-        
-                        
+
+
 
         return view('admin.dashboard',compact('posts','popular_posts','total_pending_posts','all_views',
         'author_count','new_authors_today','active_authors','category_count','tag_count'));
-    } 
+    }
 
     ////Author Dashboard
 
@@ -74,9 +74,9 @@ class HomeController extends Controller
     public function loginProcess(Request $request){
 
         $this->validate($request,[
-        
+
             'email'   =>  'required'
-            
+
 
         ]);
         $login = $request->only('email', 'password');
@@ -87,22 +87,22 @@ class HomeController extends Controller
             $request->session()->regenerate();
 
             if(auth()->user()->role_id == 1){
-                return redirect(route('admin.dashboard'));
+                return redirect()->route('admin.dashboard')->with('success', 'Welcome to admin dashboard');
             }else{
-                return redirect()->back();
+                return redirect()->back()->with('error','Your creditional is invalid');
             }
 
             //return redirect()->intended('admin.dashboard');
 
             ///return redirect(route('admin.dashboard'));
     }else{
-        return redirect()->back()->with('msg','Your creditional is invalid');
+        return redirect()->back()->with('error','Your creditional is invalid');
     }
 }
 
 public function logout(){
     Auth::logout();
-    
+
     return redirect(route('registration.form'));
 }
 
@@ -122,7 +122,7 @@ public function registration(Request $request){
         'email'   =>   'required',
         'password'   =>   'required',
         'about'   =>   'nullable'
-     
+
 
     ]);
     $user  = new User();
@@ -132,16 +132,16 @@ public function registration(Request $request){
     $user->password  = bcrypt($request->password);
     $user->about  = $request->about;
     $user->save();
-    return redirect()->back()->with('msg','Registration Successfully.');
+    return redirect()->back()->with('success','Registration Successfully.');
 
 }
 //Author for Login//
 public function authorLogin(Request $request){
 
     $this->validate($request,[
-    
+
         'email'   =>  'required'
-        
+
 
     ]);
     $login = $request->only('email', 'password');
@@ -150,27 +150,27 @@ public function authorLogin(Request $request){
 
     if (Auth::attempt($login)) {
 
-    
+
         $request->session()->regenerate();
 
         if(auth()->user()->role_id == 2){
-            return redirect(route('author.dashboard'));
+            return redirect()->route('author.dashboard')->with('success','Welcome to author dashboard');
         }else{
-            return redirect()->back();
+            return redirect()->back()->with('error', 'Your credential is invalid!!');
         }
 
         //return redirect()->intended('admin.dashboard');
 
-      
+
 }else{
     return redirect()->back()->with('msg','Your creditional is invalid');
 }
 }
 
-///Front end 
+///Front end
 
 public function homeIndex(){
-    
+
     $posts = Post::latest()->Approved()->Published()->paginate(9);
     $categories = Category::all();
     return view('master',compact('categories','posts'));

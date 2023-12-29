@@ -16,7 +16,7 @@ class SubscribeController extends Controller
         $subscriber  = new Subscribe();
         $subscriber->email  =  $request->email;
         $subscriber->save();
-        return redirect()->back()->with('msg','You Successfully added to Subscriber List.');
+        return redirect()->back()->with('success','You Successfully added to Subscriber List.');
 
 
     }

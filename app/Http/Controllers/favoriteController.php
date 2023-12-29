@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 class favoriteController extends Controller
 {
     public function add($id){
-       // dd($id);
 
        $user  = Auth::user();
 
@@ -17,11 +16,11 @@ class favoriteController extends Controller
        if($isFavorite  == 0){
 
         $user->favorite_posts()->attach($id);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Favorite Post added successfully!');
        }else{
 
         $user->favorite_posts()->detach($id);
-        return redirect()->back();
+        return redirect()->back()->with('error', 'Favorite Post remove successfully!');
 
        }
     }

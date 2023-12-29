@@ -6,6 +6,7 @@ use App\Models\Tag;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Comment;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Notification;
 class AuthorpostController extends Controller
 {
     public function authorIndex(){
-  
+
 
         $posts = Auth::User()->posts()->latest()->get();
         return view('author.post.index',compact('posts'));
@@ -45,7 +46,7 @@ class AuthorpostController extends Controller
 
         $image = $request->file('image');
 
-        
+
 
         $slug = Str::slug($request->title);
 
@@ -57,7 +58,7 @@ class AuthorpostController extends Controller
         } else {
             $imagename  = "default.png";
         }
-       
+
         $post = new Post();
         $post->user_id  = Auth::id();
         $post->title    = $request->title;
@@ -74,13 +75,13 @@ class AuthorpostController extends Controller
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
 
-        ////Notification 
+        ////Notification
         $users  =  User::where('role_id','1')->get();
 
         foreach($users as $user){
             Notification::send($user,new NewAuthorPost($post));
         }
-        
+
 
 
         return redirect(route('author.post.index'))->with('msg','Post Successfully Sava.');
@@ -111,7 +112,7 @@ class AuthorpostController extends Controller
             'body'   =>  'required'
 
         ]);
-        
+
         $post =  Post::find($id);
         if($post->user_id != Auth::id()){
 
@@ -123,7 +124,7 @@ class AuthorpostController extends Controller
         $image = $request->file('image');
 
         $slug = Str::slug($request->name);
-    
+
 
         if ($request->hasFile('image')) {
             $currentDate = Carbon::now()->toDateString();
@@ -132,12 +133,12 @@ class AuthorpostController extends Controller
             $image->storeAs('category', $imagename);
             if(file_exists(public_path($post->image)) && public_path($post->image) != NULL && public_path($post->image) != '')
             unlink(public_path('uploads/category/'.$old_file_name));
-           
+
 
         } else {
             $imagename  = $post->image;
         }
-       
+
         $post->user_id  = Auth::id();
         $post->title    = $request->title;
         $post->image    = $imagename;
@@ -158,36 +159,43 @@ class AuthorpostController extends Controller
     }
 
     public function authorShow($id){
-    
+
         $post  = Post::find($id);
         if($post->user_id != Auth::id()){
 
             return redirect()->back()->with('msg','You are not authorized to access this Post','error');
         }
 
-    
+
         return view('author.post.show',compact('post'));
      }
 
 
      public function authorDelete($id){
-
         $post =  Post::find($id);
-        if($post->user_id != Auth::id()){
 
-            return redirect()->back()->with('msg','You are not authorized to access this Post','error');
+        if($post->user_id != Auth::id()){
+            return redirect()->back()->with('error', 'You are not authorized to access this Post');
         }
+
+        $comments = Comment::where('post_id', $id)->get();
+
+        foreach ($comments as $comment) {
+            $comment->delete();
+        }
+
         @unlink(public_path('uploads/category/'.$post->image));
 
         $post->categories()->detach();
         $post->tags()->detach();
 
         $post->delete();
-     
-     return redirect(route('author.post.index'))->with('msg','Post Delete Successfully.');
- }
 
- ////Notification 
+        return redirect(route('author.post.index'))->with('success', 'Post Deleted Successfully.');
+    }
+
+
+ ////Notification
 
 
 }
